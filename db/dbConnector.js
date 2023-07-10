@@ -8,10 +8,17 @@ const env = process.env.NODE_ENV || "development";
  * Mongoose Connection
  **/
 
-mongoose.connect(environment[env].dbString, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(
+  environment[env].dbString,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  },
+  (err) => {
+    if (err) throw err;
+    console.log("connected mongodb");
+  }
+);
 
 let db = mongoose.connection;
 db.on("error", () => {
